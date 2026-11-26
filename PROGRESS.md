@@ -20,5 +20,6 @@
 - Step 20: put the site online (choose free hosting first).
 
 ## Notes
+- Installed skill: `web-design-guidelines` (vercel-labs/agent-skills), project-level in `.claude/skills/`, pinned in `skills-lock.json`. Use it to review UI files, ideally before Step 20 (going online). Update with `npx skills update`.
 - After adding or changing `src/content.config.ts`, or adding a new page file, restart `npm run dev` (Ctrl+C, then run it again). A server that was already running won't pick up the new file.
 - The "Projects", "Experience" and "Contact" nav links point to #projects, #experience, #contact. Only build sections Paras has given content for.
