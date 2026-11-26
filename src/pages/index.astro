@@ -15,11 +15,13 @@ const hero = {
 };
 
 // The conversation card. Swap the last answer whenever you ship a new project.
+// "hi" is for words in Hindi, so screen readers pronounce them correctly.
 const call = [
   { who: "caller", text: "Hi. What does Paras build?" },
   {
     who: "site",
-    text: "हाय! मैं Paras की website हूँ. He builds AI systems: agents, eval pipelines and automation.",
+    hi: "हाय! मैं Paras की website हूँ.",
+    text: "He builds AI systems: agents, eval pipelines and automation.",
   },
   { who: "caller", text: "What’s the latest?" },
   {
@@ -40,7 +42,7 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
       >
         <div>
           <h1
-            class="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl"
+            class="font-display text-5xl leading-[1.05] font-bold tracking-tight text-balance sm:text-6xl"
           >
             {hero.headline}
           </h1>
@@ -102,6 +104,11 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
                     <span class="sr-only">
                       {line.who === "site" ? "Paras’s website: " : "Visitor: "}
                     </span>
+                    {line.hi && (
+                      <>
+                        <span lang="hi">{line.hi}</span>{" "}
+                      </>
+                    )}
                     {line.text}
                   </p>
                 </li>
@@ -152,13 +159,14 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
                   </div>
                 </div>
 
+                {project.data.results.length > 0 && (
                 <dl class="space-y-5 lg:border-l lg:border-ink/10 lg:pl-8">
                   {project.data.results.map((result) => (
                     <div>
                       <dt class="text-sm font-medium text-dusk">
                         {result.label}
                       </dt>
-                      <dd class="mt-1 flex items-baseline gap-3">
+                      <dd class="mt-1 flex items-baseline gap-3 tabular-nums">
                         <span class="text-lg text-dusk">{result.before}</span>
                         <span class="text-marigold" aria-hidden="true">
                           →
@@ -171,6 +179,7 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
                     </div>
                   ))}
                 </dl>
+                )}
               </article>
             ))
           }

@@ -59,7 +59,7 @@
 
 /* Small sound bars that move while the call "plays" */
 .bar {
-  animation: bar-move 0.8s ease-in-out 8 alternate;
+  animation: bar-move 0.8s ease-in-out 6 alternate;
 }
 
 @keyframes bar-move {
