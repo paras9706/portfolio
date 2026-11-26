@@ -58,7 +58,7 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
       >
         <div>
           <h1
-            class="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
+            class="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl"
           >
             {hero.headline}
           </h1>
@@ -80,3 +80,54 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
             </a>
           </div>
         </div>
+        <div
+          class="rounded-3xl bg-white p-5 shadow-[0_24px_60px_-30px_rgba(27,31,75,0.45)] sm:p-6"
+        >
+          <div class="flex items-center gap-3 border-b border-ink/10 pb-4">
+            <div class="flex h-6 items-center gap-1" aria-hidden="true">
+              {
+                barHeights.map((height, i) => (
+                  <span
+                    class:list={["bar w-1 rounded-full bg-marigold", height]}
+                    style={`animation-delay:${i * 0.12}s`}
+                  />
+                ))
+              }
+            </div>
+            <p class="text-sm font-medium text-dusk">
+              Talking to Paras’s website
+            </p>
+          </div>
+
+          <ol class="mt-5 space-y-3">
+            {
+              call.map((line, i) => (
+                <li
+                  class:list={[
+                    "bubble flex",
+                    line.who === "site" ? "justify-end" : "justify-start",
+                  ]}
+                  style={`--delay:${0.4 + i * 0.9}s`}
+                >
+                  <p
+                    class:list={[
+                      "max-w-[85%] rounded-2xl px-4 py-3 leading-relaxed",
+                      line.who === "site"
+                        ? "rounded-br-md bg-ink text-white"
+                        : "rounded-bl-md bg-mist text-ink",
+                    ]}
+                  >
+                    <span class="sr-only">
+                      {line.who === "site" ? "Paras’s website: " : "Visitor: "}
+                    </span>
+                    {line.text}
+                  </p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
