@@ -1,0 +1,81 @@
+---
+// One case study page per project file. nova.md becomes /projects/nova/.
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, summary, stack, results, repo } = project.data;
+
+const linkClass =
+  "font-semibold underline decoration-marigold decoration-2 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
+---
+
+<Base title={`${title}: case study, Paras Sharma`} description={summary}>
+  <article class="mx-auto max-w-3xl px-6 pt-8 pb-24 lg:pt-14">
+    <a href="/#projects" class:list={[linkClass, "text-sm"]}>
+      <span aria-hidden="true">←</span> All projects
+    </a>
+
+    <h1
+      class="font-display mt-8 text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl"
+    >
+      {title}
+    </h1>
+    <p class="mt-5 text-xl leading-relaxed text-dusk">{summary}</p>
+
+    <dl
+      class="mt-10 grid gap-6 rounded-3xl bg-white p-6 shadow-[0_24px_60px_-40px_rgba(27,31,75,0.45)] sm:grid-cols-2 sm:p-8"
+    >
+      {
+        results.map((result) => (
+          <div>
+            <dt class="text-sm font-medium text-dusk">{result.label}</dt>
+            <dd class="mt-1 flex items-baseline gap-3">
+              <span class="text-lg text-dusk">{result.before}</span>
+              <span class="text-marigold" aria-hidden="true">
+                →
+              </span>
+              <span class="sr-only">to</span>
+              <span class="font-display text-4xl font-bold">
+                {result.after}
+              </span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <ul class="mt-6 flex flex-wrap gap-2" aria-label="Built with">
+      {
+        stack.map((item) => (
+          <li class="rounded-full bg-white px-3 py-1 text-sm font-medium">
+            {item}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div
+      class="mt-12 text-lg leading-relaxed [&_h2]:font-display [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-2xl [&_h2]:font-semibold [&_p]:mb-4"
+    >
+      <Content />
+    </div>
+
+    {
+      repo && (
+        <a href={repo} class:list={[linkClass, "mt-6 inline-block"]}>
+          See the code on GitHub
+        </a>
+      )
+    }
+  </article>
+</Base>

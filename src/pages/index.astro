@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import "../styles/global.css";
+import Base from "../layouts/Base.astro";
 
 // Projects come from src/content/projects/. Lowest "order" shows first.
 const projects = (await getCollection("projects")).sort(
@@ -31,34 +31,10 @@ const call = [
 const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Paras Sharma, AI systems built and tested</title>
-    <meta
-      name="description"
-      content="Paras Sharma builds AI agents, evaluation pipelines and automation."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
-  <body>
-    <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-      <a href="/" class="font-display text-lg font-semibold">Paras Sharma</a>
-      <nav class="flex gap-6 text-sm font-medium text-dusk">
-        <a href="#projects" class="hover:text-ink">Projects</a>
-        <a href="#experience" class="hover:text-ink">Experience</a>
-        <a href="#contact" class="hover:text-ink">Contact</a>
-      </nav>
-    </header>
-
-    <main>
+<Base
+  title="Paras Sharma, AI systems built and tested"
+  description="Paras Sharma builds AI agents, evaluation pipelines and automation."
+>
       <section
         class="mx-auto grid max-w-6xl gap-12 px-6 pt-10 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-20"
       >
@@ -158,14 +134,22 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
                       </li>
                     ))}
                   </ul>
-                  {project.data.repo && (
+                  <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3">
                     <a
-                      href={project.data.repo}
-                      class="mt-6 inline-block font-semibold underline decoration-marigold decoration-2 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                      href={`/projects/${project.id}/`}
+                      class="font-semibold underline decoration-marigold decoration-2 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                     >
-                      See the code on GitHub
+                      Read the case study <span aria-hidden="true">→</span>
                     </a>
-                  )}
+                    {project.data.repo && (
+                      <a
+                        href={project.data.repo}
+                        class="font-semibold underline decoration-marigold decoration-2 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                      >
+                        See the code on GitHub
+                      </a>
+                    )}
+                  </div>
                 </div>
 
                 <dl class="space-y-5 lg:border-l lg:border-ink/10 lg:pl-8">
@@ -192,6 +176,4 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
           }
         </div>
       </section>
-    </main>
-  </body>
-</html>
+</Base>
