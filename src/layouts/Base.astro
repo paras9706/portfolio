@@ -16,6 +16,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#F3F5F9" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,16 +26,21 @@ const { title, description } = Astro.props;
   </head>
 
   <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-      <a href="/" class="font-display text-lg font-semibold">Paras Sharma</a>
+      <a
+        href="/"
+        class="font-display text-lg font-semibold decoration-marigold decoration-2 underline-offset-4 hover:underline"
+      >
+        Paras Sharma
+      </a>
       <nav class="flex gap-6 text-sm font-medium text-dusk">
         <a href="/#projects" class="hover:text-ink">Projects</a>
-        <a href="/#experience" class="hover:text-ink">Experience</a>
-        <a href="/#contact" class="hover:text-ink">Contact</a>
+        {/* Add Experience (/#experience) and Contact (/#contact) links back when those sections exist. */}
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <slot />
     </main>
   </body>

@@ -15,6 +15,29 @@
     color: var(--color-ink);
     font-family: var(--font-body);
   }
+
+  /* Same dark outline on every link when moving with the Tab key */
+  a:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* "Skip to content" stays off screen until someone presses Tab */
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: white;
+  font-weight: 600;
+  transform: translateY(-300%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
 }
 
 /* Call bubbles appear one by one when the page loads */
