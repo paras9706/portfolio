@@ -11,6 +11,8 @@
 - Case study pages: `src/pages/projects/[id].astro` makes one page per project file (Nova at /projects/nova/), showing results, tags and the Markdown body. Project bodies use `## Problem`, `## Approach`, `## Results` headings. Cards link to it with "Read the case study →".
 - Shared layout `src/layouts/Base.astro` holds the head, fonts and top menu; every page uses it.
 
+- Design review with the web-design-guidelines skill, and fixes: skip-to-content link, same focus outline on all links, Hindi words tagged `lang="hi"` (the `hi` field in the `call` list), sound bars shortened to under 5 seconds, balanced headlines, tabular numbers, no empty results box, link styles inside case study text.
+
 ## In progress
 - Nothing.
 
@@ -20,6 +22,7 @@
 - Step 20: put the site online (choose free hosting first).
 
 ## Notes
+- The "Experience" and "Contact" menu links are hidden in `src/layouts/Base.astro` until those sections exist. Add them back in Steps 18 and 19.
 - Installed skill: `web-design-guidelines` (vercel-labs/agent-skills), project-level in `.claude/skills/`, pinned in `skills-lock.json`. Use it to review UI files, ideally before Step 20 (going online). Update with `npx skills update`.
 - After adding or changing `src/content.config.ts`, or adding a new page file, restart `npm run dev` (Ctrl+C, then run it again). A server that was already running won't pick up the new file.
 - The "Projects", "Experience" and "Contact" nav links point to #projects, #experience, #contact. Only build sections Paras has given content for.
