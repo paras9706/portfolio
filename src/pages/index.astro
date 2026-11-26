@@ -1,5 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import "../styles/global.css";
+
+// Projects come from src/content/projects/. Lowest "order" shows first.
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 // ALL HERO TEXT LIVES HERE. Edit these lines when your work changes.
 const hero = {
@@ -126,6 +132,64 @@ const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
               ))
             }
           </ol>
+        </div>
+      </section>
+
+      <section id="projects" class="mx-auto max-w-6xl scroll-mt-6 px-6 pb-24">
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+          Projects
+        </h2>
+
+        <div class="mt-8 space-y-6">
+          {
+            projects.map((project) => (
+              <article class="grid gap-8 rounded-3xl bg-white p-6 shadow-[0_24px_60px_-40px_rgba(27,31,75,0.45)] sm:p-8 lg:grid-cols-[1.2fr_0.8fr]">
+                <div>
+                  <h3 class="font-display text-2xl font-semibold">
+                    {project.data.title}
+                  </h3>
+                  <p class="mt-3 max-w-xl text-lg leading-relaxed text-dusk">
+                    {project.data.summary}
+                  </p>
+                  <ul class="mt-5 flex flex-wrap gap-2" aria-label="Built with">
+                    {project.data.stack.map((item) => (
+                      <li class="rounded-full bg-mist px-3 py-1 text-sm font-medium">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  {project.data.repo && (
+                    <a
+                      href={project.data.repo}
+                      class="mt-6 inline-block font-semibold underline decoration-marigold decoration-2 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                    >
+                      See the code on GitHub
+                    </a>
+                  )}
+                </div>
+
+                <dl class="space-y-5 lg:border-l lg:border-ink/10 lg:pl-8">
+                  {project.data.results.map((result) => (
+                    <div>
+                      <dt class="text-sm font-medium text-dusk">
+                        {result.label}
+                      </dt>
+                      <dd class="mt-1 flex items-baseline gap-3">
+                        <span class="text-lg text-dusk">{result.before}</span>
+                        <span class="text-marigold" aria-hidden="true">
+                          →
+                        </span>
+                        <span class="sr-only">to</span>
+                        <span class="font-display text-4xl font-bold">
+                          {result.after}
+                        </span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))
+          }
         </div>
       </section>
     </main>
