@@ -1,16 +1,131 @@
 ---
+import "../styles/global.css";
+
+// The phone call shown in the hero. Edit the text here any time.
+const call = [
+  { who: "caller", text: "Hello? Is this Paras?" },
+  {
+    who: "site",
+    text: "हाय! मैं Paras की website हूँ. He’s busy building voice agents right now. बताइए, क्या help चाहिए?",
+  },
+  { who: "caller", text: "What does he actually do?" },
+  {
+    who: "site",
+    text: "He writes the prompts, runs the test calls and fixes what breaks. His Nova agent went from 77.5% to 97.5% on critical tests.",
+  },
+  { who: "caller", text: "Show me the work." },
+  { who: "site", text: "Sure. The projects are just below." },
+];
+
+const barHeights = ["h-3", "h-5", "h-4", "h-6", "h-3"];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paras Sharma, voice AI prompt engineer</title>
+    <meta
+      name="description"
+      content="Paras Sharma designs, tests and improves voice AI agents in English and Hinglish."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Hanken+Grotesk:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+      <a href="/" class="font-display text-lg font-semibold">Paras Sharma</a>
+      <nav class="flex gap-6 text-sm font-medium text-dusk">
+        <a href="#projects" class="hover:text-ink">Projects</a>
+        <a href="#experience" class="hover:text-ink">Experience</a>
+        <a href="#contact" class="hover:text-ink">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section
+        class="mx-auto grid max-w-6xl gap-12 px-6 pt-10 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-20"
+      >
+        <div>
+          <h1
+            class="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
+          >
+            I build voice agents people enjoy talking to.
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-dusk">
+            I’m Paras, a prompt engineer in Gurugram. I design, test and fix
+            voice AI agents in English and Hinglish, and I measure every change
+            with real test calls.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="rounded-full bg-marigold px-6 py-3 font-semibold text-ink hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
+              See projects
+            </a>
+            <a
+              href="https://github.com/paras9706"
+              class="rounded-full border border-ink/25 px-6 py-3 font-semibold hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
+              Open GitHub
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="rounded-3xl bg-white p-5 shadow-[0_24px_60px_-30px_rgba(27,31,75,0.45)] sm:p-6"
+        >
+          <div class="flex items-center gap-3 border-b border-ink/10 pb-4">
+            <div class="flex h-6 items-center gap-1" aria-hidden="true">
+              {
+                barHeights.map((height, i) => (
+                  <span
+                    class:list={["bar w-1 rounded-full bg-marigold", height]}
+                    style={`animation-delay:${i * 0.12}s`}
+                  />
+                ))
+              }
+            </div>
+            <p class="text-sm font-medium text-dusk">
+              On a call with Paras’s website
+            </p>
+          </div>
+
+          <ol class="mt-5 space-y-3">
+            {
+              call.map((line, i) => (
+                <li
+                  class:list={[
+                    "bubble flex",
+                    line.who === "site" ? "justify-end" : "justify-start",
+                  ]}
+                  style={`--delay:${0.4 + i * 0.9}s`}
+                >
+                  <p
+                    class:list={[
+                      "max-w-[85%] rounded-2xl px-4 py-3 leading-relaxed",
+                      line.who === "site"
+                        ? "rounded-br-md bg-ink text-white"
+                        : "rounded-bl-md bg-mist text-ink",
+                    ]}
+                  >
+                    <span class="sr-only">
+                      {line.who === "site" ? "Paras’s website: " : "Caller: "}
+                    </span>
+                    {line.text}
+                  </p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
